@@ -1,0 +1,51 @@
+(\x y z -> foldr z x y).map
+
+(\x y z -> foldr z x y) :: b -> [a] -> (a -> b -> b) -> b
+(.) :: (d -> e) -> (c -> d) -> c -> e
+map :: (f -> g) -> [f] -> [g]
+
+(d -> e) = b -> [a] -> (a -> b -> b) -> b
+d = b
+e = [a] -> (a -> b -> b) -> b
+
+(c -> d) = (f -> g) -> [f] -> [g]
+c = (f -> g)
+d = [f] -> [g]
+
+igualando d:
+b = [f] -> [g]
+
+(\x y z -> foldr z x y).map :: (f -> g) -> [a] -> (a -> ([f] -> [g]) -> [f] -> [g]) -> [f] -> [g]
+
+_________________________________________________________________________
+
+(foldr).(.)$(!!)
+
+(foldr).(.):
+foldr :: (a -> b -> b) -> b -> [a] -> b
+(.) :: (d -> e) -> (c -> d) -> c -> e
+(.) :: (g -> h) -> (f -> g) -> f -> h
+(d -> e) = (a -> b -> b) -> b -> [a] -> b
+d = (a -> b -> b)
+e = b -> [a] -> b
+(c -> d) = (g -> h) -> (f -> g) -> f -> h
+c = (g -> h)
+d = (f -> g) -> f -> h
+igualando d:
+a = (f -> g)
+b = h = f
+c = (g -> f)
+(foldr).(.) :: (g -> f) -> f -> [f -> g] -> f
+
+(foldr).(.)$(!!):
+(foldr).(.) :: (g -> f) -> f -> [f -> g] -> f
+$ :: (i -> j) -> i -> j
+(!!) :: [k] -> Int -> k
+(i -> j) = (g -> f) -> f -> [f -> g] -> f
+i = (g -> f)
+j = f -> [f -> g] -> f
+i = [k] -> Int -> k
+igualando i:
+g = [k]
+f = Int -> k
+(foldr).(.)$(!!) :: (Int -> k) -> [(Int -> k) -> [k]] -> Int -> k
